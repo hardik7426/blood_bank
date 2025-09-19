@@ -10,14 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-	return MaterialApp(
-	  debugShowCheckedModeBanner: false,
-	  title: 'Blood Bank App',
-	  theme: ThemeData(
-		colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-		useMaterial3: true,
-	  ),
-	  home: const SplashScreen(), // 👈 First screen
-	);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Blood Bank App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        useMaterial3: true,
+      ),
+      home: const SplashScreen(), // 👈 First screen
+    );
   }
 }
