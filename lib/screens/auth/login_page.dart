@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register_page.dart';
+import 'forgot_password.dart';
+import 'package:blood_bank/screens/user_panel/home/home_screen_active.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,12 +20,12 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Row(
                 children: [
                   Text(
@@ -34,38 +36,35 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    '👋',
-                    style: TextStyle(fontSize: 26),
-                  ),
+                  const Text('👋', style: TextStyle(fontSize: 26)),
                 ],
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               // Email
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
                   hintText: 'Email',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: const BorderSide(color: Colors.red),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: const BorderSide(color: Colors.red),
                   ),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Password
               TextField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   hintText: 'Password',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
@@ -79,29 +78,31 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: const BorderSide(color: Colors.red),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: const BorderSide(color: Colors.red),
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ForgotPassword()),
+                    );
+                  },
                   child: Text(
                     'Forgot password?',
-                    style: TextStyle(
-                      color: Colors.red[700],
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Google Login Button
               SizedBox(
                 width: double.infinity,
@@ -115,12 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     elevation: 3,
                   ),
-                  // icon: Image.network(
-                  //   'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
-                  //   height: 24,
-                  //   width: 24,
-                  // ),
-                  label: Text(
+                  label: const Text(
                     'Sign in with Google',
                     style: TextStyle(
                       color: Colors.black87,
@@ -128,10 +124,11 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 16,
                     ),
                   ),
+                  icon: const Icon(Icons.login, color: Colors.red),
                   onPressed: () {},
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               // Login Button
               SizedBox(
                 width: double.infinity,
@@ -144,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     elevation: 2,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                       color: Colors.white,
@@ -153,37 +150,39 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    // Here you can handle login logic
-                    print("Email: ${_emailController.text}");
-                    print("Password: ${_passwordController.text}");
+                    if (_emailController.text.isNotEmpty &&
+                        _passwordController.text.isNotEmpty) {
+                      // ✅ Navigate to Home Screen
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreenRegistered(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Please enter email and password")),
+                      );
+                    }
                   },
                 ),
               ),
-              SizedBox(height: 18),
+              const SizedBox(height: 18),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: TextStyle(color: Colors.black87),
-                  ),
+                  const Text("Don't have an account? ", style: TextStyle(color: Colors.black87)),
                   TextButton(
                     style: TextButton.styleFrom(padding: EdgeInsets.zero),
                     onPressed: () {
-                      print('object');
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterPage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => const RegisterPage()),
                       );
                     },
                     child: Text(
                       "Register",
-                      style: TextStyle(
-                        color: Colors.red[700],
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
