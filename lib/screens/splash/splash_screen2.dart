@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:blood_bank/screens/auth/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:blood_bank/screens/splash/splash_screen3.dart';
 
 class SplashScreen2 extends StatefulWidget {
   const SplashScreen2({super.key});
@@ -16,7 +16,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const SplashScreen3()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
   }
