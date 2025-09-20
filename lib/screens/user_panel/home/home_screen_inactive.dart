@@ -24,6 +24,8 @@ class FigmaToCodeApp extends StatelessWidget {
 }
 
 class HomeScreenNotRegistered extends StatelessWidget {
+  const HomeScreenNotRegistered({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

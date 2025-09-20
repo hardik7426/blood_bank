@@ -4,7 +4,7 @@ import 'forgot_password.dart';
 import 'package:blood_bank/screens/user_panel/home/home_screen_active.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
